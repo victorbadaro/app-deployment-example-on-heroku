@@ -2,7 +2,10 @@ const express = require('express')
 const nunjucks = require('nunjucks')
 const routes = require('./routes')
 const app = express()
-const PORT = 3333
+let port = process.env.PORT
+
+if(port == null || port == '')
+    port = 3333
 
 app.set('view engine', 'njk')
 app.use(express.static('public'))
@@ -15,6 +18,6 @@ nunjucks.configure('src/app/views', {
     noCache: true
 })
 
-app.listen(PORT, () => {
-    console.log(`Listening at: ${PORT}`)
+app.listen(port, () => {
+    console.log(`Listening at: ${port}`)
 })
